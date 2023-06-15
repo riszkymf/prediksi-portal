@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  cache:
+    image: redis:7.0.11-alpine
+    restart: always
+    ports:
+      - '6377:6379'
+    command: redis-server 
+    volumes: 
+      - cache:/data
+  prediksi-be:
+    image: prediksi-be:latest
+    ports:
+      - "8586:8586"        
+    environment:
+    - APP_HOST=0.0.0.0
+    - APP_PORT=5334
+    - FLASK_DEBUG=true
+    - REDIS_URI=redis://cache:6379/3
+    command: ["python3","manage.py"]
+volumes:
+  cache:
+    driver: local
