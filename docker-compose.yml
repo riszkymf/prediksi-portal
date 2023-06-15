@@ -1,0 +1,33 @@
+version: '3.3'
+services: 
+  prediksi-fe:
+    image: prediksi-portal-fe
+    build: ./frontend
+    ports:
+      - "5884:5884"        
+    environment:
+      - VUE_APP_API_HOST=http://prediksi-be:5334/api
+      - APP_HOST=0.0.0.0
+      - APP_PORT=5884
+  redisdb:
+    image: redis:7.0.11-alpine
+    restart: always
+    ports:
+      - '6377:6379'
+    command: redis-server 
+    # volumes: 
+    #   - cache:/data
+  prediksi-be:
+    image: prediksi-portal-be
+    build: ./backend
+    ports:
+      - "5334:5334"        
+    environment:
+    - APP_HOST=0.0.0.0
+    - APP_PORT=5334
+    - FLASK_DEBUG=true
+    - REDIS_URI=redis://redisdb:6379/4
+    command: ["python3","manage.py"]
+# volumes:
+#   cache:
+#     driver: local
