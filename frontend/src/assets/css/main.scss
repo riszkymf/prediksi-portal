@@ -1,0 +1,185 @@
+@keyframes fadeInThumbnail {
+    from{
+        opacity: 0%;
+    }
+    to{
+        opacity: 100%;
+    }
+}
+
+@keyframes fadeOutHide {
+    from{
+        opacity: 100%;
+        height: 100%;
+        visibility: visible;
+    }
+    to{
+        opacity: 0%;
+        visibility: hidden;
+        height: 0%;
+    }
+}
+
+
+
+@media (min-width: $media-xs) { 
+    $media-width: $media-xs;
+    
+}
+
+
+
+@media(min-width: $media-sm){
+ 
+}
+
+    @media (min-width: $media-md) { 
+
+
+        $media-width: $media-md;
+        nav#navbarMenu{
+            @include sidebar($darkmode:false,$overlay:false);
+            animation: slideIn .5s ease-in-out alternate forwards;
+            z-index: 50;
+            ul.menuList{
+                width: 100%;
+                a{
+                    width: 100%;
+                    padding: 0.5rem 0px;
+                }
+                a.nav-item{
+                    li::after{
+                        width:0px;
+                        height:0px;
+                        border:10px solid;
+                        border-top-color: transparent;
+                        border-left-color: transparent;
+                        border-right-color: black;
+                        border-bottom-color: transparent;
+                        float: right;
+                        opacity: 0;
+                    }
+                }
+                a.nav-item:hover{
+                    li::after{
+                        opacity: .7;
+                        width:0px;
+                        height:0px;
+                        border:10px solid;
+                        border-top-color: transparent;
+                        border-left-color: transparent;
+                        border-right-color: black;
+                        border-bottom-color: transparent;
+                        content: "\00a0  \00a0";
+                        float: right;
+                    }
+                }
+                a{
+                    font-size: 1.5vw;
+                    text-transform: capitalize;
+                    color: map-get($map: $font-color, $key: "text-black");
+                    text-decoration: none;
+                }
+            }
+
+            #togglerButton{
+                width: 100%;
+                text-align: right;
+                a{
+                    color: map-get($map: $font-color, $key: "text-black");
+                    i::before{                    
+                        transition: transform .5s ease-in-out;
+                        transform: rotate(0deg);
+                    }
+                    &:hover h4 i{
+                        border: map-get($map: $font-color, $key: "text-black") solid 2px;
+                        border-right: none;
+                        padding-left: 5px;
+                    }
+                }
+                h4{
+                    margin-right: 0px;
+                }
+            }
+
+            ul.social-list{
+                flex-direction: row;
+                .social-items{
+                    color: map-get($map: $font-color, $key: "text-black");
+                    padding-right: 15px;
+                }
+            }
+        }
+        div#pageContent{
+            width: 75%;
+            position: absolute;
+            left: 25%;
+            animation: shrinkPage ease-in-out .5s alternate forwards;
+            &.expand{
+                animation: expandPage ease-in-out .5s alternate forwards;
+            }
+        }
+
+        nav#navbarMenu.hide{
+            animation: slideOut .5s ease-in-out alternate forwards;
+            a.nav-item{
+                li::after{
+                    display: none;
+                }
+            }
+            a.nav-item:hover{
+                li::after{
+                    display: none;
+                }
+            }
+            #togglerButton{
+                width: 100%;
+                text-align: right;
+                a{
+                    color: map-get($map: $font-color, $key: "text-black");
+                    i::before{
+                        transition: transform .5s ease-in-out;
+                        transform: rotate(180deg);
+                    };
+                    &:hover h4 i{
+
+                        border: map-get($map: $font-color, $key: "text-black") solid 2px;
+                        border-right: none;
+                        padding-left: 5px;
+                    }
+                }
+                h4{
+                    margin-right: 0px;
+                }
+            }
+        }
+
+    }
+
+@media (min-width: $media-lg) { 
+    $media-width: $media-lg;
+
+}
+
+@media (min-width: $media-xxl) { 
+    $media-width: $media-xxl;
+}
+
+@media (min-width: $media-xxxl) { 
+    $media-width: $media-xxxl;
+    //Navbar
+
+
+}
+
+
+div.dark-mode-toggle{
+    padding-top: 1.5rem;
+}
+
+
+// Background Dark Mode & Light Mode
+body{
+
+}
+

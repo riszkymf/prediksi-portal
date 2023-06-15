@@ -1,0 +1,164 @@
+
+@use "./const.scss" as *;
+
+@mixin sidebar($darkmode:false,$overlay:false){
+    height: 100%;
+    position: fixed;
+    background-color: map-get($map:$background-color , $key: "godoats_yellow");
+    align-items: baseline;
+    width: calc(100%/6);
+    padding-left: 45px;
+    align-content: flex-start;
+    .sidebar-title{
+        padding-bottom: 50px;
+        width: 100%;
+        padding-top: 15px;
+    }
+}
+
+@keyframes slideOut {
+    from{
+        transform: translateX(0%);
+    }
+    to{
+        transform: translateX(-90%);
+    }
+}
+
+@keyframes slideIn {
+    from{
+        transform: translateX(-90%);
+    }
+    to{
+        transform: translateX(0%);
+    }
+}
+
+@media (min-width: $media-md) { 
+    $media-width: $media-md;
+    nav#navbarMenu{
+        @include sidebar($darkmode:false,$overlay:false);
+        margin-top: 0px;
+        z-index: 50;
+        .navbar-brand{
+            *{
+                font-size: 3vw;
+            }
+        }
+        ul.menuList{
+            width: 100%;
+            a{
+                width: 100%;
+                padding: 0.5rem 0px;
+            }
+            a.nav-item{
+                li::after{
+                    width:0px;
+                    height:0px;
+                    border:10px solid;
+                    border-top-color: transparent;
+                    border-left-color: transparent;
+                    border-right-color: black;
+                    border-bottom-color: transparent;
+                    float: right;
+                    opacity: 0;
+                }
+            }
+            a.nav-item:hover{
+                li::after{
+                    opacity: .7;
+                    width:0px;
+                    height:0px;
+                    border:10px solid;
+                    border-top-color: transparent;
+                    border-left-color: transparent;
+                    border-right-color: black;
+                    border-bottom-color: transparent;
+                    content: "\00a0  \00a0";
+                    float: right;
+                }
+            }
+            a.nav-item.active{
+                li::after{
+                    transition: opacity ease-in-out .5s;
+                    opacity: 1;
+                    float: right;
+                    content: "\00a0  \00a0";
+                }
+            }
+            i{
+                padding-right: 1vw;
+            }
+            a{
+                font-size: 1.2vw;
+                text-transform: capitalize;
+                color: map-get($map: $font-color, $key: "text-black");
+                text-decoration: none;
+            }
+        }
+
+        #togglerButton{
+            width: 100%;
+            text-align: right;
+            a{
+                color: map-get($map: $font-color, $key: "text-black");
+                i::before{                    
+                    transition: transform .5s ease-in-out;
+                    transform: rotate(0deg);
+                }
+                &:hover h4 i{
+                    border: map-get($map: $font-color, $key: "text-black") solid 2px;
+                    border-right: none;
+                    padding-left: 5px;
+                }
+            }
+            h4{
+                margin-right: 0px;
+            }
+        }
+
+        ul.social-list{
+            flex-direction: row;
+            .social-items{
+                color: map-get($map: $font-color, $key: "text-black");
+                padding-right: 15px;
+            }
+        }
+    }
+
+
+    nav#navbarMenu.hide{
+        animation: slideOut .5s ease-in-out alternate forwards;
+        a.nav-item{
+            li::after{
+                display: none;
+            }
+        }
+        a.nav-item:hover{
+            li::after{
+                display: none;
+            }
+        }
+        #togglerButton{
+            width: 100%;
+            text-align: right;
+            a{
+                color: map-get($map: $font-color, $key: "text-black");
+                i::before{
+                    transition: transform .5s ease-in-out;
+                    transform: rotate(180deg);
+                };
+                &:hover h4 i{
+
+                    border: map-get($map: $font-color, $key: "text-black") solid 2px;
+                    border-right: none;
+                    padding-left: 5px;
+                }
+            }
+            h4{
+                margin-right: 0px;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,13 @@
+@use "./const.scss" as *;
+
+@media (min-width: $media-md) { 
+    div.table-responsive table td{
+        font-size: 1vw;
+    }
+
+    $media-width: $media-md;
+
+    div#pageContent{
+        position: relative;
+    }
+}
